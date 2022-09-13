@@ -1,33 +1,18 @@
 require_relative 'item'
 
 class Author < Item
-  attr_accessor :name, :items
-  attr_reader :genre, :label, :archived, :source
-  
-  def initialize(name)
-    @name = name
+  attr_reader :id, :items
+  attr_accessor :first_name, :last_name
+
+  def initialize(first_name, last_name)
+    @id = Random.rand(1..1000)
+    @first_name = first_name
+    @last_name = last_name
     @items = []
   end
-  
+
   def add_item(item)
-    @items.push(item) unless @items.include?(item)
-  end
-  
-  def add_genre(genre)
-    @genre = genre.name
-    genre.item << self unless genre.items.include?(self)
-  end
-  
-  def add_label(label)
-    @label = label
-    label.items.push(self) unless label.items.include?(self)
-  end
-  
-  def move_to_archive
-    true if can_be_archived?
-  end
-  
-  def can_be_archived?
-    (Date.today.year - @publish_date.year) > 10
+    @items.push(item)
+    item.add_author(self)
   end
 end

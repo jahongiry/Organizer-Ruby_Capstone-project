@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'date'
 class Item
   attr_reader :id, :archived, :publish_date, :genre, :author, :source, :label
@@ -8,7 +10,7 @@ class Item
     @publish_date = publish_date
   end
 
-  def move_to_archive()
+  def move_to_archive
     @archived = true if can_be_archived?
   end
 

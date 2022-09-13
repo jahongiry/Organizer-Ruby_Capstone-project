@@ -1,6 +1,4 @@
 require 'io/console'
-
-
 require_relative 'books/book'
 require_relative 'books/label'
 require_relative 'item'

@@ -1,21 +1,30 @@
 require 'io/console'
 
 
-require_relative 'books/book'
-require_relative 'books/label'
+require_relative 'Books/book'
+require_relative 'Books/label'
 require_relative 'item'
-require_relative 'books/modules/label_module'
-require_relative 'books/modules/book_module'
+require_relative 'Books/modules/label_module'
+require_relative 'Books/modules/book_module'
+require_relative 'modules/author_module'
+require_relative 'modules/game_module'
+require_relative 'modules/preserve_data'
 
 
 class Main
 
   include BookModule
   include LabelModule
+  include AuthorModule
+  include GameModule
+  include PreserveData
 
   def initialize
     @books = []
     @labels = []
+    @games = []
+    @authors = []
+    load_all_data
   end
 
   def user_input(message)
@@ -38,9 +47,10 @@ class Main
           7- Add a book
           8- Add a music album
           9- Add a game
-          10- Quit'
+          10- Add an author
+          11- Quit'
       input = user_input('Choose an option: ').to_i
-      break if input == 10
+      break if input == 11
 
       options(input)
     end
@@ -52,13 +62,61 @@ class Main
     case input
     when 1
       list_books
+    when 3
+      list_games
     when 5
       list_labels
+    when 6
+      list_authors
     when 7
       add_book
+    when 9
+      add_game
+    when 10
+      add_author
     else
 
       puts 'Please choose a valid number!'
+    end
+  end
+
+  def save_json_data
+    games = []
+    authors = []
+    # Save games
+
+    @games.each do |game|
+      games.push({
+                   publish_date: game.publish_date,
+                   multiplayer: game.multiplayer,
+                   last_played_at: game.last_played_at
+                 })
+    end
+    save_data(games, 'games')
+
+    # Save authors
+
+    @authors.each do |author|
+      authors.push({
+                     first_name: author.first_name,
+                     last_name: author.last_name
+                   })
+    end
+    save_data(authors, 'authors')
+  end
+
+  def load_all_data
+
+    # Load games
+    games = load_data('games')
+    games.each do |game|
+      @games.push(Game.new(game['publish_date'], game['multiplayer'], game['last_played_at']))
+    end
+
+    # Load authors
+    authors = load_data('authors')
+    authors.each do |author|
+      @authors.push(Author.new(author['first_name'], author['last_name']))
     end
   end
 end

@@ -14,8 +14,8 @@ class Main
   include LabelModule
 
   def initialize
-    @books = []
-    @labels = []
+    @books = load_books
+    @labels = load_labels
   end
 
   def user_input(message)

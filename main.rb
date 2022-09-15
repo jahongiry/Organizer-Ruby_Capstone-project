@@ -84,7 +84,6 @@ class Main
     games = []
     authors = []
     # Save games
-
     @games.each do |game|
       games.push({
                    publish_date: game.publish_date,
@@ -95,7 +94,6 @@ class Main
     save_data(games, 'games')
 
     # Save authors
-
     @authors.each do |author|
       authors.push({
                      first_name: author.first_name,

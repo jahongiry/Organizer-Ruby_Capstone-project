@@ -1,6 +1,6 @@
 require_relative '../models/genre'
-require_relative '../controllers/genre_controller'
-require_relative '../models/music_album'
+require_relative '../genre/genre_controller'
+require_relative '../music_album/music_album'
 
 describe Genre do
   include GenresController
@@ -12,9 +12,9 @@ describe Genre do
   end
 
   it 'should store genres' do
-    genres = [Genre.new('test1'), Genre.new('test2')]
+    genres = Genre.new('test1')
     store_genres(genres)
-    expect(File.exist?('./controllers/genres.json') && File.read('./controllers/genres.json') != '').to eq true
-    File.write('./controllers/genres.json', '')
+    expect(File.exist?('./genre/genres.json') && File.read('./genre/genres.json') != '').to eq true
+    File.write('./genre/genres.json', '')
   end
 end

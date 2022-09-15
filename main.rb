@@ -1,35 +1,36 @@
 require 'io/console'
 
+require_relative 'music_album/music_album'
+require_relative 'music_album/music_album_controller'
+require_relative 'genre/genre'
+require_relative 'genre/genre_controller'
 
-require_relative 'Books/book'
-require_relative 'Books/label'
+require_relative 'books/book'
+require_relative 'books/label'
 require_relative 'item'
-require_relative 'Books/modules/label_module'
-require_relative 'Books/modules/book_module'
-require_relative 'Books/persist_files/persist_books'
-require_relative 'Books/persist_files/persist_labels'
+require_relative 'books/persist_files/persist_books'
+require_relative 'books/persist_files/persist_labels'
+require_relative 'books/modules/label_module'
+require_relative 'books/modules/book_module'
 require_relative 'modules/author_module'
 require_relative 'modules/game_module'
 require_relative 'modules/preserve_data'
-require_relative 'controllers/music'
-require_relative 'controllers/genre_controller'
 
 
 class Main
-
-  include BookModule
-  include LabelModule
+  include MusicAlbumsController
+  include GenresController
   include BooksPersistence
   include LabelsPersistence
+  include BookModule
+  include LabelModule
 
   include AuthorModule
   include GameModule
   include PreserveData
 
-  include MusicAlbumController
-  include GenresController
-
   def initialize
+    @genres = load_genres
     @books = load_books
     @labels = load_labels
     @games = []
@@ -64,6 +65,10 @@ class Main
 
       options(input)
     end
+    store_genres(@genres)
+    store_books(@books)
+    store_labels(@labels)
+    save_json_data
     puts 'Thank you for using our app !'
   end
 
@@ -84,12 +89,12 @@ class Main
       list_authors
     when 7
       add_book
+    when 8
+      add_music_album
     when 9
       add_game
     when 10
       add_author
-    when 8
-      add_music_album
     else
 
       puts 'Please choose a valid number!'
@@ -100,7 +105,6 @@ class Main
     games = []
     authors = []
     # Save games
-
     @games.each do |game|
       games.push({
                    publish_date: game.publish_date,
@@ -111,7 +115,6 @@ class Main
     save_data(games, 'games')
 
     # Save authors
-
     @authors.each do |author|
       authors.push({
                      first_name: author.first_name,
@@ -122,8 +125,9 @@ class Main
   end
 
   def load_all_data
+
     # Load games
-    games = load_data("games")
+    games = load_data('games')
     games.each do |game|
       @games.push(Game.new(game['publish_date'], game['multiplayer'], game['last_played_at']))
     end

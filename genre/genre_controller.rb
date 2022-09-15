@@ -4,8 +4,8 @@ module GenresController
   def store_genres(genres)
     return if genres.empty?
 
-    file = './controllers/genres.json'
-    File.new('./controllers/genres.json', 'w+') unless File.exist?(file)
+    file = './genre/genres.json'
+    File.new('./genre/genres.json', 'w+') unless File.exist?(file)
     data = []
     genres.each do |genre|
       data << {
@@ -32,7 +32,7 @@ module GenresController
     if @genres.empty?
       puts 'The genres list is empty'
     else
-      puts '📑 Genres list:'
+      puts 'Genres list:'
       @genres.each_with_index do |genre, index|
         puts "#{index + 1}-[Genre] ID: #{genre.id} | Name: #{genre.name}"
       end

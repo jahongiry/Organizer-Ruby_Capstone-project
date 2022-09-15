@@ -1,11 +1,12 @@
 require './books/book'
+require './books/label'
 
 describe Book do
   before :each do
     @label = Label.new('new', 'red')
-    @book = Book.new('mustapha', 'bad', '2022-09-05', false, 'Gift', 1)
-    @second_book = Book.new('mustapha', 'good', '2022-09-05', false, 'Gift', 5)
-    @third_book = Book.new('mustapha', 'good', '2010-06-05', false, 'Gift', 23)
+    @book = Book.new('yusupov', 'bad', '2022-09-05', false, 'Gift', 1)
+    @second_book = Book.new('yusupov', 'good', '2022-09-05', false, 'Gift', 5)
+    @third_book = Book.new('yusupov', 'good', '2010-06-05', false, 'Gift', 23)
     @book.add_label(@label)
   end
 

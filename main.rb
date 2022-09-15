@@ -6,15 +6,24 @@ require_relative 'Books/label'
 require_relative 'item'
 require_relative 'Books/modules/label_module'
 require_relative 'Books/modules/book_module'
+require_relative 'Books/persist_files/persist_books'
+require_relative 'Books/persist_files/persist_labels'
 require_relative 'modules/author_module'
 require_relative 'modules/game_module'
 require_relative 'modules/preserve_data'
+require_relative 'controllers/music'
+require_relative 'controllers/genre_controller'
 
 
 class Main
 
   include BookModule
   include LabelModule
+  include BooksPersistence
+  include LabelsPersistence
+
+  include PreserveData
+  include GameModule
 
   include MusicAlbumController
   include GenresController
@@ -22,6 +31,9 @@ class Main
   def initialize
     @books = load_books
     @labels = load_labels
+    @games = []
+    @authors = []
+    load_all_data
   end
 
   def user_input(message)
@@ -59,10 +71,10 @@ class Main
     case input
     when 1
       list_books
-    when 3
-      list_games
     when 2
       list_music_albums
+    when 3
+      list_games
     when 4
       list_genres
     when 5
@@ -109,9 +121,8 @@ class Main
   end
 
   def load_all_data
-
     # Load games
-    games = load_data('games')
+    games = load_data("games")
     games.each do |game|
       @games.push(Game.new(game['publish_date'], game['multiplayer'], game['last_played_at']))
     end

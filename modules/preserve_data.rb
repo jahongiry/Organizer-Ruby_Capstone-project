@@ -5,16 +5,15 @@ module PreserveData
     File.write("./data/#{json_file}.json", JSON.generate(data_array), mode: "a")
   end
 
-  def load_data(json_file)
+  def load_data
     data = []
-    file = "./data/#{json_file}.json"
+    file = "./data/games.json"
     return data unless File.exist?(file) && File.read(file) != ''
 
-    if File.empty?("./data/#{json_file}.json")
+    if File.empty?("./data/games.json")
       puts 'No data in the catalog'
     else
-      JSON.parse(File.read("./data/#{json_file}.json"))
-
+      JSON.parse(File.read("./data/games.json"))
     end
   end
 end

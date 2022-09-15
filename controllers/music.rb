@@ -1,5 +1,7 @@
 # frozen_string_literal: true
-
+require_relative '../models/genre'
+require_relative '../Books/label'
+require_relative '../models/author'
 require 'json'
 
 module MusicAlbumController

@@ -1,9 +1,9 @@
 class Genre
     attr_accessor :item, :name, :id
 
-    def initialize(name, id= abc)
+    def initialize(name, id= nil)
         @name = name
-        @id = id || random.Rand(1..100)
+        @id = id || Random.rand(1..100)
         @item = []
     end
 

@@ -5,12 +5,6 @@ require_relative 'music_album/music_album_controller'
 require_relative 'genre/genre'
 require_relative 'genre/genre_controller'
 
-# require_relative 'game_author/list_games_authors'
-# require_relative 'game_author/add_game'
-# require_relative 'game_author/author'
-# require_relative 'game_author/load_data'
-# require_relative 'game_author/save_data'
-
 require_relative 'books/book'
 require_relative 'books/label'
 require_relative 'item'
@@ -28,17 +22,11 @@ class Main
   include BookModule
   include LabelModule
 
-  # include ListGameAndAuthor
-  # include AddGame
-  # include LoadData
-  # include SaveData
 
   def initialize
     @genres = load_genres
     @books = load_books
     @labels = load_labels
-    # @game = load_games
-    # @author = load_authors
   end
 
   def user_input(message)

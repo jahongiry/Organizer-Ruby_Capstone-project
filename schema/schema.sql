@@ -1,7 +1,28 @@
-CREATE DATABASE IF NOT EXISTS catalog_db;
+CREATE DATABASE catalog;
 
 \c catalog_db;
 
+-- Create Label table
+CREATE TABLE Label(
+ id INTEGER GENERATED ALWAYS AS IDENTITY,
+ title VARCHAR(20),
+ color VARCHAR(20),
+ PRIMARY KEY(id)
+);
+
+-- Create Book table  
+CREATE TABLE Book(
+  id INT GENERATED ALWAYS AS IDENTITY,
+  publisher VARCHAR(50),
+  cover_state VARCHAR(10),
+  publish_date DATE,
+  archived BOOLEAN,
+  label_id  INT,
+  CONSTRAINT fk_book FOREIGN KEY (label_id) REFERENCES label (id) ON DELETE CASCADE,
+  PRIMARY KEY(id)
+);
+
+-- Create Author table  
 CREATE TABLE authors (
     id  INT GENERATED ALWAYS AS IDENTITY,
     first_name VARCHAR(100),
@@ -18,3 +39,21 @@ CREATE TABLE Games(
   item_id INT NOT NULL,
   CONSTRAINT item_fk FOREIGN KEY (item_id) REFERENCES Items (id) 
 )
+
+-- Create Genre table  
+CREATE TABLE genre(
+  ID SERIAL PRIMARY KEY,
+  name VARCHAR(30)
+);
+
+
+-- Create music_album table  
+CREATE TABLE music_album(
+  ID SERIAL PRIMARY KEY,
+  publish_date DATE NOT NULL,
+  on_spotify BOOLEAN NOT NULL,
+  archived BOOLEAN NOT NULL,
+  label_ID INT REFERENCES label(ID),
+  author_ID INT REFERENCES author(ID),
+  genre_ID INT REFERENCES genre(ID)
+);

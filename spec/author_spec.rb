@@ -1,4 +1,4 @@
-require_relative '../models/authors'
+require_relative '../models/author'
 
 describe Author do
   before :each do
@@ -17,12 +17,5 @@ describe Author do
     it 'should return last-name' do
       expect(@profsain.last_name).to eq('Husain')
     end
-
-      it 'Should return the number of items in the label' do
-        @profsain.add_item(Game.new('2011-12-21', 'yes', '2019-12-25'))
-        @profsain.add_item(Game.new('2011-12-21', 'yes', '2019-12-25'))
-        @profsain.add_item(Game.new('2011-12-21', 'yes', '2019-12-25'))
-        expect(@profsain.items.length).to eq(3)
-      end
   end
 end

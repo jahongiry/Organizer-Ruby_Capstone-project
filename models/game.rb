@@ -9,7 +9,7 @@ class Game < Item
     @last_played_at = Date.strptime(last_played_at, '%Y-%m-%d')
   end
 
-  def can_be_achieved?
+  def can_be_archived?
     super && (Date.today.year - @last_played_at.year) > 2
   end
 end

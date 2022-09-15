@@ -22,8 +22,9 @@ class Main
   include BooksPersistence
   include LabelsPersistence
 
-  include PreserveData
+  include AuthorModule
   include GameModule
+  include PreserveData
 
   include MusicAlbumController
   include GenresController

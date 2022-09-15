@@ -58,8 +58,6 @@ class Main
     store_genres(@genres)
     store_books(@books)
     store_labels(@labels)
-    store_movies(@movies)
-    store_sources(@sources)
     puts 'Thank you for using our app !'
   end
 

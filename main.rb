@@ -4,12 +4,18 @@ require_relative 'books/label'
 require_relative 'item'
 require_relative 'books/modules/label_module'
 require_relative 'books/modules/book_module'
+require_relative 'models/music_album'
+require_relative 'controllers/music.rb'
+require_relative 'models/genre.rb'
+require_relative 'controllers/genre_controller'
 
 
 class Main
 
   include BookModule
   include LabelModule
+  include MusicAlbumController
+  include GenresController
 
   def initialize
     @books = []
@@ -50,10 +56,16 @@ class Main
     case input
     when 1
       list_books
+    when 2
+      list_music_albums
+    when 4
+      list_genres
     when 5
       list_labels
     when 7
       add_book
+    when 8
+      add_music_album
     else
 
       puts 'Please choose a valid number!'

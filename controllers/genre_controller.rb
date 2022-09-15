@@ -18,7 +18,7 @@ module GenresController
 
   def load_genres
     data = []
-    file = './genre/genres.json'
+    file = './controllers/genres.json'
     return data unless File.exist?(file) && File.read(file) != ''
 
     JSON.parse(File.read(file)).each do |genre|

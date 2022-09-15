@@ -2,7 +2,7 @@ require 'json'
 
 module PreserveData
   def save_data(data_array, json_file)
-    File.write("./data/#{json_file}.json", JSON.generate(data_array), mode: "a")
+    File.write("./data/#{json_file}.json", JSON.generate(data_array))
   end
 
   def load_data(json_file)

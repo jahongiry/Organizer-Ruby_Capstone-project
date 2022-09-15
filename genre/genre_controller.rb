@@ -32,7 +32,7 @@ module GenresController
     if @genres.empty?
       puts 'The genres list is empty'
     else
-      puts '📑 Genres list:'
+      puts 'Genres list:'
       @genres.each_with_index do |genre, index|
         puts "#{index + 1}-[Genre] ID: #{genre.id} | Name: #{genre.name}"
       end

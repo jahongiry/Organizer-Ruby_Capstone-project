@@ -15,16 +15,13 @@ class Main
 
   include BookModule
   include LabelModule
-  include AuthorModule
-  include GameModule
-  include PreserveData
+
+  include MusicAlbumController
+  include GenresController
 
   def initialize
-    @books = []
-    @labels = []
-    @games = []
-    @authors = []
-    load_all_data
+    @books = load_books
+    @labels = load_labels
   end
 
   def user_input(message)
@@ -64,6 +61,10 @@ class Main
       list_books
     when 3
       list_games
+    when 2
+      list_music_albums
+    when 4
+      list_genres
     when 5
       list_labels
     when 6
@@ -74,6 +75,8 @@ class Main
       add_game
     when 10
       add_author
+    when 8
+      add_music_album
     else
 
       puts 'Please choose a valid number!'

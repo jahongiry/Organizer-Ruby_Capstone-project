@@ -8,7 +8,7 @@ class Item
     @publish_date = publish_date
   end
 
-  def move_to_archive()
+  def move_to_archive
     @archived = true if can_be_archived?
   end
 
@@ -16,7 +16,6 @@ class Item
     @label = label
     label.items.push(self) unless label.items.include?(self)
   end
-
 
   def author=(author)
     @author = author

@@ -14,7 +14,6 @@ describe MusicAlbum do
     music_album.archived.should eq true
   end
 
-
   it 'Should store MusicAlbum in json file' do
     music_album = MusicAlbum.new(true, '04-10-2020')
     save_music_album(music_album)

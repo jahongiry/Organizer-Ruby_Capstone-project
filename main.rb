@@ -16,7 +16,6 @@ require_relative 'modules/author_module'
 require_relative 'modules/game_module'
 require_relative 'modules/preserve_data'
 
-
 class Main
   include MusicAlbumsController
   include GenresController
@@ -125,7 +124,6 @@ class Main
   end
 
   def load_all_data
-
     # Load games
     games = load_data('games')
     games.each do |game|

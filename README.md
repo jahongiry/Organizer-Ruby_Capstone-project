@@ -58,7 +58,7 @@ rspec spec
 
 ### Run the project
 
-`ruby app.rb`
+`ruby main.rb`
 
 ## Authors
 

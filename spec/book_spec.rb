@@ -1,11 +1,14 @@
 require './books/book'
+require './books/label'
 
 describe Book do
   before :each do
     @label = Label.new('new', 'red')
-    @book = Book.new('mustapha', 'bad', '2022-09-05', false, 'Gift', 1)
-    @second_book = Book.new('mustapha', 'good', '2022-09-05', false, 'Gift', 5)
-    @third_book = Book.new('mustapha', 'good', '2010-06-05', false, 'Gift', 23)
+    @book = Book.new('yusupov', 'bad', '2022-09-05', false, 'Gift', 1)
+    @second_book = Book.new('yusupov',
+                            'good', '2022-09-05', false, 'Gift', 5)
+    @third_book = Book.new('yusupov', 'good',
+                           '2010-06-05', false, 'Gift', 23)
     @book.add_label(@label)
   end
 
@@ -16,15 +19,18 @@ describe Book do
   end
 
   describe '#can_be_archived?' do
-    it 'should return true when cover_state equals "bad" ' do
+    it 'should return true when
+    cover_state equals "bad" ' do
       expect(@book.can_be_archived?).to eql true
     end
 
-    it 'should return false when cover_state is not equal to "bad" ' do
+    it 'should return false when cover_state is not
+     equal to "bad" ' do
       expect(@second_book.can_be_archived?).to eql false
     end
 
-    it 'should return true if published_date is older than 10 years' do
+    it 'should return true if published_date is older
+    than 10 years' do
       expect(@third_book.can_be_archived?).to eql true
     end
   end
